@@ -127,18 +127,15 @@ public class FaunusJob extends AbstractJob implements Callable<Object> {
             JobID hadoopJobId = hadoopRunningJob.getJobID();
             logger.debug("found active hadoop job:", hadoopJobId.toString());
 
-            JobStatus status = hadoopRunningJob.getStatus();
-            float progress = 0.25f * (
-                    status.getSetupProgress() +
-                            status.getMapProgress() +
-                            status.getReduceProgress() +
-                            status.getCleanupProgress());
+            float progress = (
+                    hadoopRunningJob.setupProgress() +
+                    hadoopRunningJob.mapProgress() +
+                    hadoopRunningJob.reduceProgress()) / 3.0f;
 
             logger.debug("found progress: "
-                    + status.getSetupProgress() + " "
-                    + status.getMapProgress() + " "
-                    + status.getReduceProgress() + " "
-                    + status.getCleanupProgress() + " "
+                    + hadoopRunningJob.setupProgress() + " "
+                    + hadoopRunningJob.mapProgress() + " "
+                    + hadoopRunningJob.reduceProgress() + " "
                     + progress);
 
             if (jobMap.containsKey(hadoopJobId)) {
