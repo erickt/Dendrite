@@ -672,10 +672,10 @@
 
     <profiles>
         <profile>
+            <id>buildGitHistoryServer</id>
             <properties>
                 <ungit.directory>src/main/nodejs/ungit</ungit.directory>
             </properties>
-            <id>buildGitHistoryServer</id>
             <activation>
                 <property>
                     <name>withGitHistoryServer</name>
